@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the EVSW Field Bases feature.
+ */
+
+include_once 'evsw_field_bases.features.inc';
