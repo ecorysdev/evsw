@@ -22,7 +22,7 @@ function evsw_core_install() {
 
   // Enable the theme "example_theme" and set it as default.
   $themes = [
-    'atomium',
+    'evsw',
   ];
   theme_enable($themes);
   variable_set('theme_default', $themes[0]);
