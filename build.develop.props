@@ -1,0 +1,32 @@
+# Development modules.
+# --------------------
+devel.mdls.dir = devel
+devel.mdls.en = devel context field_ui maillog simpletest stage_file_proxy views_ui
+
+# Development variables.
+# ----------------------
+devel.vars.error_level = 2
+devel.vars.views_show_additional_queries = 1
+devel.vars.views_ui_show_performance_statistics = 1
+devel.vars.views_ui_show_sql_query = 1
+
+# Database download settings.
+# ---------------------------
+db.dl.username = myusername
+db.dl.password = mypassword
+
+
+# Database connection settings.
+# -----------------------------
+db.name = ecorys_evsw
+db.user = systemick
+db.password = June_2018
+db.host = 127.0.0.1
+db.port = 3306
+
+# Subsite configuration.
+# ----------------------
+project.id = evsw
+project.install.modules = evsw_core
+project.name = European Vocational Skillsweek
+project.theme.default = atomium

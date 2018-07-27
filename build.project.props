@@ -1,0 +1,25 @@
+# Subsite configuration.
+# ----------------------
+project.id = evsw
+project.install.modules = evsw_core 
+project.name = European Vocational Skills Week
+project.theme.default = atomium
+project.url.production = ${PRODUCTION_URL}
+
+# Solr configuration.
+# -------------------
+solr.type = d7_apachesolr
+
+# Admin configuration.
+# --------------------
+project.admin.email = thomas.bangham@ecorys.com
+
+# Platform configuration.
+# -----------------------
+profile = multisite_drupal_standard
+platform.package.version = 2.4
+
+# Backtrac project IDs.
+# =====================
+backtrac.id.static = ${BACKTRAC_ID_STATIC}
+backtrac.id.dynamic = ${BACKTRAC_ID_DYNAMIC}
