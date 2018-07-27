@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the EVSW Landing Pages feature.
+ */
+
+include_once 'evsw_landing_pages.features.inc';
