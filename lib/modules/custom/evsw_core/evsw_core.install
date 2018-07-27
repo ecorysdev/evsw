@@ -33,7 +33,10 @@ function evsw_core_install() {
   // subsite.install.modules property.
   $modules = [
     'metatag',
+    'evsw_front',
     'evsw_landing_pages',
+    'evsw_news',
+    'evsw_resources',
   ];
   module_enable($modules);
 }

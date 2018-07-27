@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the EVSW Resources feature.
+ */
+
+include_once 'evsw_resources.features.inc';

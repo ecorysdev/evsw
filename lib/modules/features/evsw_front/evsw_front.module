@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the EVSW Front feature.
+ */
+
+include_once 'evsw_front.features.inc';

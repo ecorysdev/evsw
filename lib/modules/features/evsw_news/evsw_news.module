@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the EVSW News feature.
+ */
+
+include_once 'evsw_news.features.inc';
