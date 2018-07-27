@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the EVSW Videos feature.
+ */
+
+include_once 'evsw_videos.features.inc';

@@ -37,6 +37,10 @@ function evsw_core_install() {
     'evsw_landing_pages',
     'evsw_news',
     'evsw_resources',
+    'evsw_slideshow',
+    'evsw_success_stories',
+    'evsw_videos',
+    'evsw_webforms',
   ];
   module_enable($modules);
 }

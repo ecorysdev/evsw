@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the EVSW Slideshow feature.
+ */
+
+include_once 'evsw_slideshow.features.inc';
