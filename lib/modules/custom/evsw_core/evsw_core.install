@@ -33,7 +33,7 @@ function evsw_core_install() {
   // subsite.install.modules property.
   $modules = [
     'metatag',
-    'evsw_field_bases',
+    'evsw_landing_pages',
   ];
   module_enable($modules);
 }
