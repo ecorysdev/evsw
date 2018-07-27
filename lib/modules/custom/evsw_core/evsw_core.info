@@ -1,0 +1,5 @@
+name = EVSW Core
+description = Takes care of project installation and updates.
+core = 7.x
+php = "5.6.9"
+multisite_version = "2.4"
