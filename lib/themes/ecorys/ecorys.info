@@ -1,8 +1,8 @@
-name = EVSW Theme
-description = A theme for the European Vocational Skills Week website.
+name = Ecorys Theme
+description = A base theme used on all Europa sites developed by Ecorys.
 core = 7.x
 php = "5.6.9"
-base theme = ecorys
+base theme = atomium
 
 regions[header] = Header
 regions[help] = Help
