@@ -101,6 +101,9 @@ function evsw_landing_pages_strongarm() {
         'path' => array(
           'weight' => '6',
         ),
+        'metatags' => array(
+          'weight' => '40',
+        ),
       ),
       'display' => array(),
     ),
