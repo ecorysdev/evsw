@@ -10,6 +10,28 @@
 function evsw_field_bases_field_default_field_bases() {
   $field_bases = array();
 
+  // Exported field_base: 'field_add_feature'.
+  $field_bases['field_add_feature'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_add_feature',
+    'indexes' => array(
+      'moddelta' => array(
+        0 => 'moddelta',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'blockreference',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'referenceable_modules' => array(),
+    ),
+    'translatable' => 0,
+    'type' => 'blockreference',
+  );
+
   // Exported field_base: 'field_banner_image'.
   $field_bases['field_banner_image'] = array(
     'active' => 1,
@@ -181,6 +203,104 @@ function evsw_field_bases_field_default_field_bases() {
     'type' => 'link_field',
   );
 
+  // Exported field_base: 'field_button_link'.
+  $field_bases['field_button_link'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_button_link',
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'link',
+    'settings' => array(
+      'attributes' => array(
+        'class' => '',
+        'rel' => '',
+        'target' => 'default',
+      ),
+      'display' => array(
+        'url_cutoff' => 80,
+      ),
+      'enable_tokens' => 1,
+      'entity_translation_sync' => FALSE,
+      'title' => 'optional',
+      'title_maxlength' => 128,
+      'title_value' => '',
+      'url' => 0,
+    ),
+    'translatable' => 0,
+    'type' => 'link_field',
+  );
+
+  // Exported field_base: 'field_button_text'.
+  $field_bases['field_button_text'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_button_text',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'text_long',
+  );
+
+  // Exported field_base: 'field_content_box'.
+  $field_bases['field_content_box'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_content_box',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'text_with_summary',
+  );
+
+  // Exported field_base: 'field_content_type'.
+  $field_bases['field_content_type'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_content_type',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'text-area' => 'Text Area',
+        'video' => 'Video',
+      ),
+      'allowed_values_function' => '',
+      'entity_translation_sync' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_copyright'.
   $field_bases['field_copyright'] = array(
     'active' => 1,
@@ -194,6 +314,28 @@ function evsw_field_bases_field_default_field_bases() {
       ),
     ),
     'locked' => 1,
+    'module' => 'text',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_country_number'.
+  $field_bases['field_country_number'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_country_number',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
     'module' => 'text',
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -253,6 +395,28 @@ function evsw_field_bases_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'datestamp',
+  );
+
+  // Exported field_base: 'field_event_number'.
+  $field_bases['field_event_number'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_event_number',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
   );
 
   // Exported field_base: 'field_file_image_alt_text'.
@@ -470,6 +634,28 @@ function evsw_field_bases_field_default_field_bases() {
     'type' => 'field_collection',
   );
 
+  // Exported field_base: 'field_row_css'.
+  $field_bases['field_row_css'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_row_css',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_short_description'.
   $field_bases['field_short_description'] = array(
     'active' => 1,
@@ -541,6 +727,51 @@ function evsw_field_bases_field_default_field_bases() {
     'type' => 'image',
   );
 
+  // Exported field_base: 'field_video'.
+  $field_bases['field_video'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_video',
+    'indexes' => array(
+      'revision_id' => array(
+        0 => 'revision_id',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'field_collection',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'hide_blank_items' => 1,
+      'path' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'field_collection',
+  );
+
+  // Exported field_base: 'field_video_copyright'.
+  $field_bases['field_video_copyright'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_video_copyright',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max_length' => 700,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_video_image'.
   $field_bases['field_video_image'] = array(
     'active' => 1,
@@ -554,6 +785,53 @@ function evsw_field_bases_field_default_field_bases() {
       ),
     ),
     'locked' => 1,
+    'module' => 'image',
+    'settings' => array(
+      'default_image' => 0,
+      'entity_translation_sync' => array(
+        0 => 'fid',
+      ),
+      'uri_scheme' => 'public',
+    ),
+    'translatable' => 0,
+    'type' => 'image',
+  );
+
+  // Exported field_base: 'field_video_link'.
+  $field_bases['field_video_link'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_video_link',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max_length' => 600,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_video_placeholder'.
+  $field_bases['field_video_placeholder'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_video_placeholder',
+    'indexes' => array(
+      'fid' => array(
+        0 => 'fid',
+      ),
+    ),
+    'locked' => 0,
     'module' => 'image',
     'settings' => array(
       'default_image' => 0,
