@@ -3,7 +3,6 @@ description = Provides all field bases for the EVSW website
 core = 7.x
 package = EVSW
 php = "5.6.9"
-multisite_version = "2.4"
 dependencies[] = blockreference
 dependencies[] = ctools
 dependencies[] = date
