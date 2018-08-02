@@ -25,3 +25,4 @@ dist/
 vendor/
 resources/git/hooks/pre-push/phpcs
 composer.lock
+build.develop.props
