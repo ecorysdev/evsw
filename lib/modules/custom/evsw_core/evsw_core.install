@@ -34,7 +34,6 @@ function evsw_core_install() {
   // subsite.install.modules property.
   $modules = [
     'metatag',
-    'blockreference',
     'field_collection',
     'evsw_front',
     'evsw_landing_pages',
