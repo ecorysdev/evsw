@@ -1,70 +1,146 @@
+# ==============================================================================
+# Workspace location.
+# ==============================================================================
 workspace:
   base: /test
   path: toolkit
 
+# ==============================================================================
+# Matrix section
+# ==============================================================================
+matrix:
+  PHING_OPTS:
+    - -logger phing.listener.AnsiColorLogger
+  PLATFORM_DEV:
+    - 2.3
+    - 2.4
+    - 2.5
+
+# ==============================================================================
+# Main services
+# ==============================================================================
 services:
   web:
-    image: fpfis/php56-dev
+    image: fpfis/php56-build
     environment:
-     - DOCUMENT_ROOT=/test/toolkit/build
+      - DOCUMENT_ROOT=/test/toolkit/build
   mysql:
-    image: fpfis/mysql56
-#  ecas:
-#    image: fpfis-acpcloud622hotmail.azurecr.io/ecas
-  selenium:
-    image: selenium/standalone-firefox
+    image: percona/percona-server:5.6
     environment:
-      - SE_OPTS=-log /tmp/selenium.log
-  solr:
-    image: fpfis/solr5
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
 
+# ==============================================================================
+# Pipelines
+# ==============================================================================
 pipeline:
 
-  toolkit:
+  # ============================================================================
+  # Setup section:
+  # ============================================================================
+  setup:
     image: fpfis/php56-dev
+    group: setup
     commands:
-      - composer update
+      - PROJECT=$(pwd) composer toolkit-install
+      - rm -rf ./.tmp/ ./build
+      - cp ./includes/phing/props/drone.props build.develop.props
+      - ./toolkit/phing project-properties-validate ${PHING_OPTS}
     volumes:
-      - /cache:/cache
+      - /cache/${DRONE_REPO_NAME}:/cache
 
+  tunnel:
+    image: fpfis/drone-frpc-plugin:latest
+    group: setup
+    detach: true
+    secrets: [ frpc_token, frpc_server ]
+    environment:
+      - PLUGIN_ENDPOINT=web:8080
+      - PLUGIN_GEN_AUTH=yes
+      - PLUGIN_DOMAIN=${DRONE_REPO_NAME}-${DRONE_BUILD_NUMBER}-${DRONE_JOB_NUMBER}.ci.fpfis.tech.ec.europa.eu
+      - PLUGIN_URL_OUTPUT_FILE=/test/toolkit/.frpc
+
+  # ============================================================================
+  # Build section:
+  # ============================================================================
   build:
     image: fpfis/php56-dev
+    group: build
     commands:
-      - ./toolkit/phing project-build-platform
-      - ./toolkit/phing build-subsite-dev
+      - ./toolkit/phing build-platform build-subsite-dev -D'platform.package.version'='${PLATFORM_DEV}' ${PHING_OPTS}
     volumes:
-      - /cache:/cache
+      - /cache/${DRONE_REPO_NAME}:/cache
 
-  install:
+  solr:
+    image: fpfis/solr5
+    group: build
+    detach: true
+
+  # ============================================================================
+  # Install section:
+  # ============================================================================
+  install-clean:
     image: fpfis/php56-dev
     commands:
-      - ./toolkit/phing install-project-clean
+      - ./toolkit/phing install-clean -D'project.url.base'="$(cat /test/toolkit/.frpc)" ${PHING_OPTS}
+      - ./toolkit/phing drush-sql-dump -D'database-file'='/test/toolkit/dump.sql' ${PHING_OPTS}
     volumes:
-      - /cache:/cache
+      - /cache/${DRONE_REPO_NAME}:/cache
 
-  test:
+  visreg-before:
+    image: fpfis/php56-build
+    secrets: [ BACKTRAC_TOKEN, BACKTRAC_DYNAMIC_PROJECT_ID ]
+    commands:
+      - ./toolkit/phing drush-settings-generate test-run-backtrac -D'project.url.base'="$(cat /test/toolkit/.frpc)" -D'backtrac.secure'='false' -D'backtrac.token'=$${BACKTRAC_TOKEN} -D'project.backtrac.id'=$${BACKTRAC_DYNAMIC_PROJECT_ID} -D'backtrac.env'='development' -D'backtrac.compare.mode'='snapshot' ${PHING_OPTS} || return 0
+
+  # ============================================================================
+  # Clone section:
+  # ============================================================================
+  install-clone:
     image: fpfis/php56-dev
     commands:
-      - ./toolkit/phing test-run-behat
+      - ./toolkit/phing install-clone -D'project.db.file'='/test/toolkit/dump.sql' ${PHING_OPTS}
     volumes:
-      - /cache:/cache
+      - /cache/${DRONE_REPO_NAME}:/cache
 
-  build-dist:
+  # Run backtrac self compare of build (may not be accurate):
+  # Possible that it starts comparing against another build.
+  # TODO: solve with better thing. (always green)
+  visreg-after:
+    image: fpfis/php56-build
+    group: prebehat
+    secrets: [ BACKTRAC_TOKEN, BACKTRAC_DYNAMIC_PROJECT_ID ]
+    commands:
+      - ./toolkit/phing drush-settings-generate test-run-backtrac -D'project.url.base'="$(cat /test/toolkit/.frpc)" -D'backtrac.secure'='false' -D'backtrac.token'=$${BACKTRAC_TOKEN} -D'project.backtrac.id'=$${BACKTRAC_DYNAMIC_PROJECT_ID} -D'backtrac.env'='development' -D'backtrac.compare.mode'='compare_itself' ${PHING_OPTS} || return 0
+
+  selenium:
+    image: selenium/standalone-chrome
+    group: prebehat
+    detach: true
+
+  # ============================================================================
+  # Test section:
+  # ============================================================================
+  behat:
     image: fpfis/php56-dev
     commands:
-      - ./toolkit/phing build-platform-dist
-      - tar -czf ${DRONE_REPO_NAME}-${DRONE_TAG}.tar.gz -C build .
+      - ./toolkit/phing drush-settings-generate test-run-behat -D'project.url.base'='$${behat.base_url}' ${PHING_OPTS}
+    volumes:
+      - /cache/${DRONE_REPO_NAME}:/cache
+
+  # ============================================================================
+  # Notify section:
+  # ============================================================================
+  slack:
+    image: plugins/slack
+    channel: ci
+    username: Subsite-QA
+    icon_url: https://www.drupal.org/files/examples_meatwad256.png
+    secrets: [ slack_webhook ]
     when:
-      event: tag
-
-  github_release:
-    image: plugins/github-release
-    files:
-      - ${DRONE_REPO_NAME}-${DRONE_TAG}.tar.gz
-    checksum:
-      - sha1
-      - sha256
-      - sha512
-    secrets: [ GITHUB_RELEASE_API_KEY ]
-    when:
-      event: tag
+      status: [ success, failure ]
+    template: >
+      {{#success build.status}}
+        {{repo.name}}@{{build.branch}} <{{build.link}}|passed> all subsite tests.
+      {{else}}
+        {{repo.name}}@{{build.branch}} <{{build.link}}|failed> subsite tests.
+      {{/success}}

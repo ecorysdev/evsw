@@ -1,0 +1,8 @@
+name = Ecorys Core Feature
+description = Core Feature
+core = 7.x
+package = Ecorys Common
+version = 7.x-1.0
+dependencies[] = blockreference
+dependencies[] = content_theme
+features[features_api][] = api:2

@@ -8,6 +8,7 @@ nbproject/
 lib/profiles/
 
 # Ignore local configuration overrides.
+build.develop.props
 build.properties.local
 phpcs.xml
 tests/balancer/*.yml

@@ -1,14 +1,10 @@
 {
-    "name": "ec-europa/subsite",
-    "description": "Subsite template to initiate a new subsite project that uses toolkit.",
-    "homepage": "https://github.com/ec-europa/toolkit#nexteuropa-toolkit",
+    "name": "ec-europa/toolkit",
+    "description": "NextEuropa Toolkit packaged for composer",
     "license": "EUPL-1.1",
-    "require": {
-        "ec-europa/toolkit": "3.*"
-    },
     "scripts": {
-        "post-install-cmd": "@toolkit-install",
-        "post-update-cmd": "@toolkit-install",
-        "toolkit-install": "PROJECT=$(pwd) composer run-script toolkit-install -d ./vendor/ec-europa/toolkit"
+        "toolkit-install": "PROJECT=${PROJECT} composer install --working-dir=includes/composer --ignore-platform-reqs --no-suggest --ansi",
+        "toolkit-update": "PROJECT=${PROJECT} composer update --working-dir=includes/composer  --ignore-platform-reqs --no-suggest --ansi",
+        "pre-update-cmd": "@toolkit-install"
     }
 }

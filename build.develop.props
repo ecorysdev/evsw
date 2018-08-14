@@ -18,11 +18,11 @@ db.dl.password = mypassword
 
 # Database connection settings.
 # -----------------------------
-db.name = ecorys_evsw
-db.user = systemick
-db.password = June_2018
+db.name = ecorys_evsw_final
+db.user = root
+db.password = tom
 db.host = 127.0.0.1
-db.port = 3306
+db.port = 
 
 # Subsite configuration.
 # ----------------------

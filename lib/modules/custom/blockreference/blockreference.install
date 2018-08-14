@@ -25,7 +25,8 @@ function blockreference_update_7200() {
   }
   $col_spec = array(
     'type' => 'varchar',
-    'length' => 129, // 4 x 32 + 1 should be enough
+  // 4 x 32 + 1 should be enough.
+    'length' => 129,
     'not null' => TRUE,
     'default' => '',
   );

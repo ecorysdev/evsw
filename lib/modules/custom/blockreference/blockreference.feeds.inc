@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * @file
+ */
+
+/**
  * Implements hook_feeds_processor_targets_alter().
  *
  * @see FeedsNodeProcessor::getMappingTargets()

@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * @file
+ */
+
+/**
  * Alter referenceable blocks, BEFORE the autocomplete match.
  *
  * These are always block objects, not options. You can change the option label

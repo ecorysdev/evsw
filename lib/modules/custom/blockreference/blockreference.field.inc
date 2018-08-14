@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * @file
+ */
+
+/**
  * Implements hook_field_info().
  */
 function blockreference_field_info() {
@@ -24,7 +28,7 @@ function blockreference_field_info() {
  */
 function blockreference_field_entity_property_callback(&$info, $entity_type, $field, $instance, $field_type) {
   $property = &$info[$entity_type]['bundles'][$instance['bundle']]['properties'][$field['field_name']];
-  // Define a data structure
+  // Define a data structure.
   $property['getter callback'] = 'entity_metadata_field_verbatim_get';
   $property['setter callback'] = 'entity_metadata_field_verbatim_set';
   $property['property info'] = blockreference_field_item_property_info();
@@ -51,7 +55,8 @@ function blockreference_field_schema($field) {
     'columns' => array(
       'moddelta' => array(
         'type' => 'varchar',
-        'length' => 129, // 4 x 32 + 1 should be enough
+  // 4 x 32 + 1 should be enough.
+        'length' => 129,
         'not null' => TRUE,
         'default' => '',
       ),
@@ -79,21 +84,21 @@ function blockreference_field_formatter_info() {
   );
   return array(
     'blockreference_default' => array(
-        'label' => t('Default (title and content)'),
-        'description' => t('Display the title and content of a block.'),
-      ) + $base,
+      'label' => t('Default (title and content)'),
+      'description' => t('Display the title and content of a block.'),
+    ) + $base,
     'blockreference_without_title' => array(
-        'label' => t('Content only'),
-        'description' => t('Display the content of a block.  Do not display the title.'),
-      ) + $base,
+      'label' => t('Content only'),
+      'description' => t('Display the content of a block.  Do not display the title.'),
+    ) + $base,
     'blockreference_title' => array(
-        'label' => t('Title only'),
-        'description' => t('Display the title of a block.  Do not display the content.'),
-      ) + $base,
+      'label' => t('Title only'),
+      'description' => t('Display the title of a block.  Do not display the content.'),
+    ) + $base,
     'blockreference_plain' => array(
-        'label' => t('Info'),
-        'description' => t('Display the info text of a block.'),
-      ) + $base,
+      'label' => t('Info'),
+      'description' => t('Display the info text of a block.'),
+    ) + $base,
     'blockreference_config_link' => array(
       'label' => t('Link to configuration'),
       'description' => t('Link to configure the block'),

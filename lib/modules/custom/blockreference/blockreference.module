@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file
+ */
+
 define('BLOCKREFERENCE_AC_REGEX', '#\[([\w\-]+):([\w\-]+)\]$#');
 
 require __DIR__ . '/blockreference.field.inc';
@@ -225,9 +229,11 @@ function theme_blockreference_formatter_config_link($variables) {
       case 'custom':
         $label = t($settings['custom_label']);
         break;
+
       case 'info':
         $label = theme_blockreference_formatter_plain($variables);
         break;
+
       case 'config':
         $label = db_query('
           SELECT title
@@ -235,6 +241,7 @@ function theme_blockreference_formatter_config_link($variables) {
           WHERE module = ? AND delta = ?
         ', array($module, $delta))->fetchField();
         break;
+
       case 'rendered':
         $label = theme_blockreference_formatter_title($variables);
         break;
